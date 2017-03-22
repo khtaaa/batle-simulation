@@ -22,4 +22,14 @@ public class attack : MonoBehaviour {
         attackinfo.attacker = transform.root;
         return attackinfo;
     }
+
+    void Onattack()
+    {
+        collider.enabled = true;
+    }
+
+    void Onattacktermination()
+    {
+        collider.enabled = false;
+    }
 }

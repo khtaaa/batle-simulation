@@ -28,8 +28,6 @@ public class player : MonoBehaviour {
         float x = Input.GetAxisRaw("Horizontal");
         if ((Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.A)) && life==true)
         {
-            status.MP--;
-            status.HP--;
             transform.Translate(0.05f * x, 0, 0);
         }
 
@@ -49,15 +47,6 @@ public class player : MonoBehaviour {
         mp.MAXMP = status.MAXMP;
 		
 	}
-
-    //敵に衝突したとき
-    void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("enemy"))
-        {
-
-        }
-    }
 
     void damage(attack.attackinfo attackinfo)
     {
