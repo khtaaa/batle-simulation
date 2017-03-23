@@ -63,6 +63,7 @@ public class player : MonoBehaviour {
                 if (one)
                 {
                     Instantiate(gameover, new Vector3(0, 0, 0), Quaternion.identity);
+                    manager.gameov = true;
                     one = false;
                     Destroy(gameObject);
                 }
