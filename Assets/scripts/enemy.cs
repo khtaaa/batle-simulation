@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class enemy : MonoBehaviour {
     characterstatus status;
+    public GameObject[] aitem;
     public float XX;
     public int syatei = 1;
     public int dameage;
@@ -37,6 +38,7 @@ public class enemy : MonoBehaviour {
             if (status.HP == 0)
             {
                 enemyspown.spo--;
+                Instantiate(aitem[Random.Range(0, aitem.Length)], transform.position, Quaternion.identity);
 
                 Destroy(gameObject);
             }
