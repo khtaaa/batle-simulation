@@ -23,13 +23,9 @@ public class attack : MonoBehaviour {
         return attackinfo;
     }
 
-    void Onattack()
+    void OnTriggerEnter2D(Collider2D other)
     {
-        collider.enabled = true;
+        status.target = other.transform.root.gameObject;
     }
 
-    void Onattacktermination()
-    {
-        collider.enabled = false;
-    }
 }

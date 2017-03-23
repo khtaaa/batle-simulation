@@ -4,22 +4,24 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class enemy_hp : MonoBehaviour {
+    characterstatus status;
+    public float hpp;
+    public float maxhpp;
     Slider _slider;
-    float maxhpp;
-    float hpp = 100;
     // Use this for initialization
     void Start()
     {
+        status = transform.root.GetComponent<characterstatus>();
         _slider = GameObject.Find("enemy(HP)").GetComponent<Slider>();
-        maxhpp = enemy.enemy_maxhp;
-
-
+        hpp = status.HP;
+        maxhpp = status.MAXHP;
     }
 
     // Update is called once per frame
     void Update()
     {
-        hpp = enemy.enemy_hp;
+        hpp = status.HP;
+        maxhpp = status.MAXHP;
         _slider.value = hpp / maxhpp * 100;
 
 

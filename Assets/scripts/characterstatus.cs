@@ -15,4 +15,7 @@ public class characterstatus : MonoBehaviour {
     public float speed = 0.05f;
     //攻撃対象
     public GameObject target = null;
+    //状態
+    public bool attacking = false;
+    public bool died = false;
 }
