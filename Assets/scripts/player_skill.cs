@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class player_skill : MonoBehaviour {
     characterstatus status;
+    public GameObject SE;//音源
 
 	// Use this for initialization
 	void Start () {
@@ -16,6 +17,7 @@ public class player_skill : MonoBehaviour {
         {
             status.MP -= 10;
             status.HP += 15;
+            SE.GetComponent<SE>().koukaon(8);
         }
 	}
 }

@@ -4,14 +4,17 @@ using UnityEngine;
 
 public class enemy : MonoBehaviour {
     characterstatus status;//ステータス
-    public GameObject[] aitem;//ドロップアイテム
+    public GameObject coin;//ドロップアイテム
     public float XX;//プレイヤーのＸ座標
     public int syatei = 1;//射程
     public int attackcount;//攻撃間隔のカウント
     public GameObject you=null;//射程内のオブジェクト保存用
+    public int rand;//乱数
+    public GameObject SE;//音源
 
 	// Use this for initialization
 	void Start () {
+        SE = GameObject.Find("SE");//SEオブジェクト獲得
         status = transform.root.GetComponent<characterstatus>();//ステータス獲得
         XX = GameObject.Find("player").transform.position.x;//プレイヤーの座標獲得
         enemyspown.spo++;//enemyspownのエネミーの数をプラス
@@ -42,7 +45,7 @@ public class enemy : MonoBehaviour {
             {
                 enemyspown.spo--;//enemyspownのエネミーの数をマイナス
                 //ドロップアイテムをランダムに生成
-                Instantiate(aitem[Random.Range(0, aitem.Length)], transform.position, Quaternion.identity);
+                Instantiate(coin, transform.position, Quaternion.identity);
                 //自分を消滅
                 Destroy(gameObject);
             }
@@ -76,6 +79,10 @@ public class enemy : MonoBehaviour {
                 you.GetComponent<characterstatus>().HP = you.GetComponent<characterstatus>().HP - damage;
                 //カウントリセット
                 attackcount = 0;
+                //乱数
+                rand = Random.Range(3,8);
+                //攻撃音
+                SE.GetComponent<SE>().koukaon(rand);
             }
 
         }

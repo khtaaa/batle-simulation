@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class player : MonoBehaviour {
     characterstatus status;//ステータス
+    public GameObject SE;//音源
     public GameObject you=null;//射程内のオブジェクト保存用
     public GameObject gameover;//ゲームオーバーの画像用オブジェクト
     bool one;//死亡時に一度だけ呼び出す用の変数
     public GameObject kougeki;//攻撃画像
     public int attackcount;//攻撃間隔カウント
+    public int rand;//乱数
 
 	void Start () {
         status = transform.root.GetComponent<characterstatus>();//ステータス獲得
@@ -52,6 +54,11 @@ public class player : MonoBehaviour {
                 {
                     //相手にダメージを与える
                     you.GetComponent<characterstatus>().HP = you.GetComponent<characterstatus>().HP - status.power;
+                    //乱数
+                    rand = Random.Range(3, 8);
+                    //攻撃音
+                    SE.GetComponent<SE>().koukaon(rand);
+
 
                 }
             }
@@ -97,6 +104,10 @@ public class player : MonoBehaviour {
                 you.GetComponent<characterstatus>().HP = you.GetComponent<characterstatus>().HP - damage;
                 //カウントリセット
                 attackcount = 0;
+                //乱数
+                rand = Random.Range(3, 8);
+                //攻撃音
+                SE.GetComponent<SE>().koukaon(rand);
 
             }
             //最大値を超えないように
@@ -126,25 +137,36 @@ public class player : MonoBehaviour {
         //HP回復アイテムをとったら最大HPの10％回復
         if (coll.gameObject.CompareTag("hp"))
         {
+            SE.GetComponent<SE>().koukaon(1);
             status.HP += status.MAXHP / 10;
         }
 
         //MP回復アイテムをとったら最大MPの10％回復
         if (coll.gameObject.CompareTag("mp"))
         {
+            SE.GetComponent<SE>().koukaon(1);
             status.MP += status.MAXMP / 10;
         }
 
         //攻撃力増加アイテムをとったら自分の攻撃力を1増加
         if (coll.gameObject.CompareTag("ken"))
         {
+            SE.GetComponent<SE>().koukaon(1);
             status.power++;
         }
 
         //防御力増加アイテムをとったら自分の防御力を1増加
         if (coll.gameObject.CompareTag("tate"))
         {
+            SE.GetComponent<SE>().koukaon(1);
             status.defense++;
+        }
+
+        //コインをとったらコインのカウントをを1増加
+        if (coll.gameObject.CompareTag("koin"))
+        {
+            SE.GetComponent<SE>().koukaon(1);
+            manager.coin++;
         } 
     }
     //プレイヤーの射程内に敵がいるとき

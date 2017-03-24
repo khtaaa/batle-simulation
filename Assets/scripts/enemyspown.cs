@@ -8,11 +8,15 @@ public class enemyspown : MonoBehaviour {
     public GameObject enemy;//敵オブジェクト
     public GameObject[] aitem;//アイテムオブジェクト
     public int rnd;//乱数用変数
+    public static bool coin;
+    public static int aitemu=0;
 
 	void Start () {
         //初期化
         count = 0;
         spo = 0;
+        coin = false;
+        aitemu = 0;
 		
 	}
 
@@ -27,9 +31,15 @@ public class enemyspown : MonoBehaviour {
             //ランダムな値を代入
             rnd = Random.Range(1,6);
             //ランダムな値が2で割り切れるならアイテムを生成
-            if (rnd % 2 == 0)
+            if (rnd % 2 == 0 )
             {
                 Instantiate(aitem[Random.Range(0, aitem.Length)], transform.position, Quaternion.identity);
+            }
+
+            if (coin == true)
+            {
+                coin = false;
+                Instantiate(aitem[aitemu], transform.position, Quaternion.identity);
             }
         }
 		

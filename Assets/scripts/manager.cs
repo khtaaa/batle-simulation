@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class manager : MonoBehaviour {
+
     public static bool gameok;//ゲーム開始されてるかされてないか
     public static bool gameov;//ゲームオーバーかそうでないか
+    public static int coin;
 
 	void Start () {
         gameok = true;//ゲーム開始
