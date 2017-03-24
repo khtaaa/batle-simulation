@@ -3,13 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class titlemanager : MonoBehaviour {
-
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
+    
+    //左クリックが押されたらbattleシーンに移動
 	void Update () {
         if (Input.GetMouseButton(0))
         {

@@ -11,11 +11,12 @@ public class characterstatus : MonoBehaviour {
     public int MAXMP = 100;
     //攻撃力
     public int power = 5;
+    //防御力
+    public int defense = 2;
     //移動速度
     public float speed = 0.05f;
+    //攻撃速度
+    public float attackspeed = 90f;
     //攻撃対象
     public GameObject target = null;
-    //状態
-    public bool attacking = false;
-    public bool died = false;
 }

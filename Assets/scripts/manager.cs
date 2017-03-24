@@ -3,24 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class manager : MonoBehaviour {
-    public static bool gameok;
-    public static bool gameov;
+    public static bool gameok;//ゲーム開始されてるかされてないか
+    public static bool gameov;//ゲームオーバーかそうでないか
 
-	// Use this for initialization
 	void Start () {
-        gameok = true;
-        gameov = false;
+        gameok = true;//ゲーム開始
+        gameov = false;//ゲームオーバーではないのでfalseにしておく
 	}
-	
-	// Update is called once per frame
-	void Update () {
+
+    void Update()
+    {
+
+        //ゲームオーバーになったら動作
         if (gameov == true)
         {
+            //左クリックでtitleに戻る
             if (Input.GetMouseButton(0))
             {
                 Application.LoadLevel("title");
             }
         }
-		
-	}
+    }
 }

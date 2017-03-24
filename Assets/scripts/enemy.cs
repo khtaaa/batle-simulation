@@ -3,72 +3,94 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class enemy : MonoBehaviour {
-    characterstatus status;
-    public GameObject[] aitem;
-    public float XX;
-    public int syatei = 1;
-    public int dameage;
-    public int attacktime=90;
-    public int attackcount;
-    public GameObject you=null;
+    characterstatus status;//ステータス
+    public GameObject[] aitem;//ドロップアイテム
+    public float XX;//プレイヤーのＸ座標
+    public int syatei = 1;//射程
+    public int attackcount;//攻撃間隔のカウント
+    public GameObject you=null;//射程内のオブジェクト保存用
 
 	// Use this for initialization
 	void Start () {
-        status = transform.root.GetComponent<characterstatus>();
-        XX = GameObject.Find("player").transform.position.x;
-        enemyspown.spo++;
-        status.MAXHP = status.MAXHP + enemyspown.count * 5;
-        status.HP = status.MAXHP;
-        status.power = status.power + enemyspown.count;
+        status = transform.root.GetComponent<characterstatus>();//ステータス獲得
+        XX = GameObject.Find("player").transform.position.x;//プレイヤーの座標獲得
+        enemyspown.spo++;//enemyspownのエネミーの数をプラス
+        status.MAXHP = status.MAXHP + enemyspown.count * 5;//MAXHPを増加
+        status.HP = status.MAXHP;//HPをMAXHPと同じにする
+        status.power = status.power + enemyspown.count;//攻撃力増加
 	}
 	
-	// Update is called once per frame
 	void Update () {
+        //ゲーム開始状態のとき動作
         if (manager.gameok == true)
         {
+            //敵が空白のとき意外起動
             if (you != null)
             {
+                //XXに射程内のプレイヤーのx座標を入れる
                 XX = you.transform.position.x;
+                //攻撃カウント動作
+                attackcount++;
             }
+            //XXが自分の射程外なら追尾
             if (XX < transform.position.x - syatei)
             {
                 transform.Translate(-0.05f, 0, 0);
             }
-
-            if (status.HP == 0)
+            //HPが0になったら
+            if (status.HP <= 0)
             {
-                enemyspown.spo--;
+                enemyspown.spo--;//enemyspownのエネミーの数をマイナス
+                //ドロップアイテムをランダムに生成
                 Instantiate(aitem[Random.Range(0, aitem.Length)], transform.position, Quaternion.identity);
-
+                //自分を消滅
                 Destroy(gameObject);
             }
-            if (you != null)
+
+            //最大値を超えないように
+            if (status.HP > status.MAXHP)
             {
-                attackcount++;
+                status.HP = status.MAXHP;//HP
             }
 
-            if (attackcount == attacktime)
+            if (status.MP > status.MAXMP)
             {
-                attackcount = 0;
-                //相手にダメージ
-                you.GetComponent<characterstatus>().HP = you.GetComponent<characterstatus>().HP - status.power;
+                status.MP = status.MAXMP;//MP
+            }
 
+            //攻撃カウントが攻撃間隔の値になったら動作
+            if (attackcount == status.attackspeed)
+            {
+                //ダメージ計算
+
+                //与えるダメージ
+                int damage;
+                //自分の攻撃から相手の防御力を引く
+                damage = status.power - you.GetComponent<characterstatus>().defense;
+                //攻撃力が1以下のならないようにする
+                if (damage < 1)
+                {
+                    damage = 1;
+                }
+                //相手にダメージ
+                you.GetComponent<characterstatus>().HP = you.GetComponent<characterstatus>().HP - damage;
+                //カウントリセット
+                attackcount = 0;
             }
 
         }
 	}
 
+    //射程範囲内にプレイヤーが入ったら動作
     void OnTriggerStay2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
-
             you = other.transform.root.gameObject;//射程範囲の相手を記憶
-
         }
-
-
     }
+
+    //射程内からプレイヤーが消えたら動作
     void OnTriggerExit2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Player"))
