@@ -2,16 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class item_botan : MonoBehaviour {
+public class aitemu : MonoBehaviour {
     public bool coinok = false;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
+    // Use this for initialization
+    void Start()
+    {
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
         if (manager.coin > 0)
         {
             coinok = true;
@@ -20,32 +22,36 @@ public class item_botan : MonoBehaviour {
         {
             coinok = false;
         }
-	}
+    }
 
     void OnMouseDown()
     {
         if (coinok == true)
         {
-            if (gameObject.CompareTag("HP"))
+            if (transform.tag=="hp")
             {
+                manager.coin--;
                 enemyspown.aitemu = 0;
                 enemyspown.coin = true;
             }
 
-            if (gameObject.CompareTag("ken"))
+            if (transform.tag == "ken")
             {
+                manager.coin--;
                 enemyspown.aitemu = 1;
                 enemyspown.coin = true;
             }
 
-            if (gameObject.CompareTag("MP"))
+            if (transform.tag == "mp")
             {
+                manager.coin--;
                 enemyspown.aitemu = 2;
                 enemyspown.coin = true;
             }
 
-            if (gameObject.CompareTag("tate"))
+            if (transform.tag == "tate")
             {
+                manager.coin--;
                 enemyspown.aitemu = 3;
                 enemyspown.coin = true;
             }

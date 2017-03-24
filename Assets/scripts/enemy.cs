@@ -6,21 +6,35 @@ public class enemy : MonoBehaviour {
     characterstatus status;//ステータス
     public GameObject coin;//ドロップアイテム
     public float XX;//プレイヤーのＸ座標
-    public int syatei = 1;//射程
+    public int syatei;//射程
     public int attackcount;//攻撃間隔のカウント
     public GameObject you=null;//射程内のオブジェクト保存用
     public int rand;//乱数
     public GameObject SE;//音源
+    public string tagu;//敵のタグ
 
 	// Use this for initialization
 	void Start () {
+        tagu = transform.tag;
         SE = GameObject.Find("SE");//SEオブジェクト獲得
         status = transform.root.GetComponent<characterstatus>();//ステータス獲得
         XX = GameObject.Find("player").transform.position.x;//プレイヤーの座標獲得
         enemyspown.spo++;//enemyspownのエネミーの数をプラス
-        status.MAXHP = status.MAXHP + enemyspown.count * 5;//MAXHPを増加
-        status.HP = status.MAXHP;//HPをMAXHPと同じにする
-        status.power = status.power + enemyspown.count;//攻撃力増加
+        if (tagu == "enemy")
+        {
+            status.MAXHP = status.MAXHP + enemyspown.count * 5;//MAXHPを増加
+            status.HP = status.MAXHP;//HPをMAXHPと同じにする
+            status.power = status.power + enemyspown.count;//攻撃力増加
+            int syatei=1;//射程
+        }
+        if (tagu == "bosu")
+        {
+            status.MAXHP = status.MAXHP + enemyspown.count * 20;//MAXHPを増加
+            status.HP = status.MAXHP;//HPをMAXHPと同じにする
+            status.power = status.power + enemyspown.count*2;//攻撃力増加
+            status.defense = status.defense + enemyspown.count;//防御力増加
+            int syatei=50;//射程
+        }
 	}
 	
 	void Update () {
@@ -44,8 +58,18 @@ public class enemy : MonoBehaviour {
             if (status.HP <= 0)
             {
                 enemyspown.spo--;//enemyspownのエネミーの数をマイナス
-                //ドロップアイテムをランダムに生成
-                Instantiate(coin, transform.position, Quaternion.identity);
+                //ドロップアイテムを生成
+                if (tagu == "enemy")
+                {
+                        Instantiate(coin, transform.position, Quaternion.identity);
+                }
+                if (tagu == "bosu")
+                {
+                        Instantiate(coin, new Vector3(0,-1,0), Quaternion.identity);
+                        Instantiate(coin, new Vector3(0, -1, 0), Quaternion.identity);
+                        Instantiate(coin, new Vector3(0, -1, 0), Quaternion.identity);
+                }
+
                 //自分を消滅
                 Destroy(gameObject);
             }

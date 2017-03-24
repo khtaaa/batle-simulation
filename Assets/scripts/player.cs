@@ -159,7 +159,7 @@ public class player : MonoBehaviour {
         if (coll.gameObject.CompareTag("tate"))
         {
             SE.GetComponent<SE>().koukaon(1);
-            status.defense++;
+            status.defense+=2;
         }
 
         //コインをとったらコインのカウントをを1増加
@@ -172,7 +172,7 @@ public class player : MonoBehaviour {
     //プレイヤーの射程内に敵がいるとき
     void OnTriggerStay2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("enemy"))
+        if (other.gameObject.CompareTag("enemy") || other.gameObject.CompareTag("bosu"))
         {
             you = other.transform.root.gameObject;//射程範囲の相手を記憶
         }
@@ -181,7 +181,7 @@ public class player : MonoBehaviour {
     //射程内から敵がいなくなったとき
     void OnTriggerExit2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("enemy"))
+        if (other.gameObject.CompareTag("enemy") || other.gameObject.CompareTag("bosu"))
         {
             you = null;//相手から離れたらnullを代入
         }

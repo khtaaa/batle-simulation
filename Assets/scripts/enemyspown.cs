@@ -5,7 +5,7 @@ using UnityEngine;
 public class enemyspown : MonoBehaviour {
     public static int count;//生成した敵の数をカウント
     public static int spo;//今場にいる敵の数
-    public GameObject enemy;//敵オブジェクト
+    public GameObject[] enemy;//敵オブジェクト
     public GameObject[] aitem;//アイテムオブジェクト
     public int rnd;//乱数用変数
     public static bool coin;
@@ -25,7 +25,14 @@ public class enemyspown : MonoBehaviour {
         if (spo < 1)
         {
             //敵を生成
-            Instantiate(enemy, transform.position + new Vector3(0, 0, 0), Quaternion.identity);
+            if (count % 10 == 0 && count !=0) 
+            {
+                Instantiate(enemy[1], transform.position + new Vector3(0, 0, 0), Quaternion.identity);
+            }
+            else
+            {
+                Instantiate(enemy[0], transform.position + new Vector3(0, 0, 0), Quaternion.identity);
+            }
             //生成した敵をカウント
             count++;
             //ランダムな値を代入
@@ -35,12 +42,11 @@ public class enemyspown : MonoBehaviour {
             {
                 Instantiate(aitem[Random.Range(0, aitem.Length)], transform.position, Quaternion.identity);
             }
-
-            if (coin == true)
-            {
-                coin = false;
-                Instantiate(aitem[aitemu], transform.position, Quaternion.identity);
-            }
+        }
+        if (coin == true)
+        {
+            coin = false;
+            Instantiate(aitem[aitemu], transform.position, Quaternion.identity);
         }
 		
 	}
