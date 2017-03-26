@@ -11,6 +11,7 @@ public class enemy : MonoBehaviour {
     public GameObject you=null;//射程内のオブジェクト保存用
     public int rand;//乱数
     public GameObject SE;//音源
+	public GameObject bgm;//BGM
     public string tagu;//敵のタグ
 	public GameObject kougeki;
 
@@ -18,6 +19,7 @@ public class enemy : MonoBehaviour {
 	void Start () {
         tagu = transform.tag;
         SE = GameObject.Find("SE");//SEオブジェクト獲得
+		bgm = GameObject.Find("BGM");//BGMオブジェクト獲得
         status = transform.root.GetComponent<characterstatus>();//ステータス獲得
         XX = GameObject.Find("player").transform.position.x;//プレイヤーの座標獲得
         enemyspown.spo++;//enemyspownのエネミーの数をプラス
@@ -31,6 +33,7 @@ public class enemy : MonoBehaviour {
         }
         if (tagu == "bosu")
         {
+			bgm.GetComponent<bgm>().bgmbgm(1);
 			status.MAXHP *= manager.wave * 5;//MAXHPを増加
             status.HP = status.MAXHP;//HPをMAXHPと同じにする
 			status.power *= manager.wave*3;//攻撃力増加
@@ -59,6 +62,7 @@ public class enemy : MonoBehaviour {
             //HPが0になったら
             if (status.HP <= 0)
             {
+				SE.GetComponent<SE>().koukaon(10);
                 enemyspown.spo--;//enemyspownのエネミーの数をマイナス
                 //ドロップアイテムを生成
                 if (tagu == "enemy")
@@ -67,6 +71,7 @@ public class enemy : MonoBehaviour {
                 }
                 if (tagu == "bosu")
                 {
+					bgm.GetComponent<bgm>().bgmbgm(0);
                     Instantiate(coin, new Vector3(0,-1,0), Quaternion.identity);
                     Instantiate(coin, new Vector3(0, -1, 0), Quaternion.identity);
                     Instantiate(coin, new Vector3(0, -1, 0), Quaternion.identity);

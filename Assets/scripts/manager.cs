@@ -22,6 +22,7 @@ public class manager : MonoBehaviour {
 		waveok = true;
 		wavetext.SetActive (false);
 		menyu = false;
+
 	}
 
     void Update()
