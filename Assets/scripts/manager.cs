@@ -3,14 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class manager : MonoBehaviour {
-
+	public static bool menyu=false;
     public static bool gameok;//ゲーム開始されてるかされてないか
     public static bool gameov;//ゲームオーバーかそうでないか
     public static int coin=0;
 	public static int wave = 0;
 	int time=0;
 	public GameObject wavetext;
+	public bool mugen = false;
 	public static bool waveok = false;
+	public GameObject menyuu;
 	void Start () {
         gameok = true;//ゲーム開始
         gameov = false;//ゲームオーバーではないのでfalseにしておく
@@ -19,10 +21,28 @@ public class manager : MonoBehaviour {
 		time = 0;
 		waveok = true;
 		wavetext.SetActive (false);
+		menyu = false;
 	}
 
     void Update()
     {
+		if (mugen == true) {
+			if (coin < 1) {
+				coin = 1;
+			}
+		}
+		if (menyu == true) {
+			if ((Input.GetKey (KeyCode.LeftControl)) && (Input.GetKey (KeyCode.C))) {
+				if (Input.GetKeyDown (KeyCode.Space)) {
+					mugen = !mugen;
+				}
+			}
+			gameok = false;
+			menyuu.SetActive (true);
+		} else {
+			gameok = true;
+			menyuu.SetActive (false);
+		}
 		//wave
 		if (waveok == true) {
 			wavetext.SetActive (true);

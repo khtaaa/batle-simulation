@@ -9,7 +9,7 @@ public class botan_sc : MonoBehaviour {
     void OnMouseDown()
     {
         //ゲーム状態を切り替え
-        manager.gameok = !manager.gameok;
+		manager.menyu = !manager.menyu;
         //スクロール状態を切り替え
         haikei.move = !haikei.move;
         //効果音

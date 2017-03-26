@@ -56,13 +56,11 @@ public class player : MonoBehaviour {
 
 
             //攻撃カウントが攻撃間隔に達したら動作
-            if (attackcount == status.attackspeed)
+            if (attackcount >= status.attackspeed)
             {
+				//カウントリセット
+				attackcount = 0;
 				attack ();
-                //カウントリセット
-                attackcount = 0;
-                
-
             }
             //最大値を超えないように
             if (status.HP > status.MAXHP)
@@ -94,21 +92,31 @@ public class player : MonoBehaviour {
             status.MP += status.MAXMP / 10;
         }
 
-        //攻撃力増加アイテムをとったら自分の攻撃力を1増加
+        //剣をとったら自分の攻撃力を1増加
         if (coll.gameObject.CompareTag("ken"))
         {
             SE.GetComponent<SE>().koukaon(1);
             status.power++;
         }
 
-        //防御力増加アイテムをとったら自分の防御力を1増加
+        //盾をとったら自分の防御力を1増加
         if (coll.gameObject.CompareTag("tate"))
         {
             SE.GetComponent<SE>().koukaon(1);
             status.defense+=2;
         }
 
-        //コインをとったらコインのカウントをを1増加
+		//クリスタルをとったら攻撃速度を1増加
+		if (coll.gameObject.CompareTag("kurisutaru"))
+		{
+			SE.GetComponent<SE>().koukaon(1);
+			status.attackspeed--;
+			if (status.attackspeed < 10) {
+				status.attackspeed = 10;
+			}
+		} 
+
+        //コインをとったらコインのカウントを1増加
         if (coll.gameObject.CompareTag("koin"))
         {
             SE.GetComponent<SE>().koukaon(9);

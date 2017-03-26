@@ -55,6 +55,13 @@ public class aitemu : MonoBehaviour {
                 enemyspown.aitemu = 3;
                 enemyspown.coin = true;
             }
+
+			if (transform.tag == "kurisutaru")
+			{
+				manager.coin--;
+				enemyspown.aitemu = 4;
+				enemyspown.coin = true;
+			}
         }
     }
 }
