@@ -22,17 +22,18 @@ public class enemy : MonoBehaviour {
         enemyspown.spo++;//enemyspownのエネミーの数をプラス
         if (tagu == "enemy")
         {
-            status.MAXHP = status.MAXHP + enemyspown.count * 5;//MAXHPを増加
+			status.MAXHP *= manager.wave;//MAXHPを増加
             status.HP = status.MAXHP;//HPをMAXHPと同じにする
-            status.power = status.power + enemyspown.count;//攻撃力増加
+			status.power *= manager.wave*2;//攻撃力増加
+			status.defense *= manager.wave;//防御力増加
             int syatei=1;//射程
         }
         if (tagu == "bosu")
         {
-            status.MAXHP = status.MAXHP + enemyspown.count * 20;//MAXHPを増加
+			status.MAXHP *= manager.wave * 5;//MAXHPを増加
             status.HP = status.MAXHP;//HPをMAXHPと同じにする
-            status.power = status.power + enemyspown.count*2;//攻撃力増加
-            status.defense = status.defense + enemyspown.count;//防御力増加
+			status.power *= manager.wave*3;//攻撃力増加
+			status.defense *= manager.wave*2;//防御力増加
             int syatei=50;//射程
         }
 	}
@@ -65,9 +66,12 @@ public class enemy : MonoBehaviour {
                 }
                 if (tagu == "bosu")
                 {
-                        Instantiate(coin, new Vector3(0,-1,0), Quaternion.identity);
-                        Instantiate(coin, new Vector3(0, -1, 0), Quaternion.identity);
-                        Instantiate(coin, new Vector3(0, -1, 0), Quaternion.identity);
+                    Instantiate(coin, new Vector3(0,-1,0), Quaternion.identity);
+                    Instantiate(coin, new Vector3(0, -1, 0), Quaternion.identity);
+                    Instantiate(coin, new Vector3(0, -1, 0), Quaternion.identity);
+					//次のwaveにする
+					manager.wave++;
+					manager.waveok = true;
                 }
 
                 //自分を消滅

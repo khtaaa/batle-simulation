@@ -8,7 +8,6 @@ public class player : MonoBehaviour {
     public GameObject you=null;//射程内のオブジェクト保存用
     public GameObject gameover;//ゲームオーバーの画像用オブジェクト
     bool one;//死亡時に一度だけ呼び出す用の変数
-    public GameObject kougeki;//攻撃画像
     public int attackcount;//攻撃間隔カウント
     public int rand;//乱数
 
@@ -22,44 +21,13 @@ public class player : MonoBehaviour {
         if (manager.gameok == true)
         {
 
-
-            /*
-             //移動
-            // 右・左
-            float x = Input.GetAxisRaw("Horizontal");
-            if ((Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.A)) && status.died==false)
-            {
-                transform.Translate(status.speed * x, 0, 0);
-            }
-            //左に行き過ぎないようにする
-            if (transform.position.x < -8)
-            {
-                transform.Translate(status.speed, 0, 0);
-            }
-            //右に行き過ぎないようにする
-            if (transform.position.x >= 8)
-            {
-                transform.Translate(status.speed * -1, 0, 0);
-            }
-            */
-
-
             //スペースで攻撃
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                //攻撃画像生成
-                Instantiate(kougeki, transform.position + new Vector3(0.8f, -0.2f, 0f), Quaternion.identity);
                 //射程内に敵がいたら動作
                 if (you != null)
                 {
-                    //相手にダメージを与える
-                    you.GetComponent<characterstatus>().HP = you.GetComponent<characterstatus>().HP - status.power;
-                    //乱数
-                    rand = Random.Range(3, 8);
-                    //攻撃音
-                    SE.GetComponent<SE>().koukaon(rand);
-
-
+					attack ();
                 }
             }
 
@@ -89,25 +57,10 @@ public class player : MonoBehaviour {
             //攻撃カウントが攻撃間隔に達したら動作
             if (attackcount == status.attackspeed)
             {
-                //ダメージ計算
-
-                //与えるダメージ
-                int damage;
-                //自分の攻撃力から相手の防御力を引く
-                damage = status.power - you.GetComponent<characterstatus>().defense;
-                //与えるダメージが1以下にならないようにする
-                if (damage < 1)
-                {
-                    damage = 1;
-                }
-                //相手にダメージ
-                you.GetComponent<characterstatus>().HP = you.GetComponent<characterstatus>().HP - damage;
+				attack ();
                 //カウントリセット
                 attackcount = 0;
-                //乱数
-                rand = Random.Range(3, 8);
-                //攻撃音
-                SE.GetComponent<SE>().koukaon(rand);
+                
 
             }
             //最大値を超えないように
@@ -125,14 +78,6 @@ public class player : MonoBehaviour {
     //プレイヤーに何か触れたとき
     void OnCollisionEnter2D(Collision2D coll)
     {
-        /*
-        //敵が触れたら自分に敵の攻撃力ぶんダメージを受けてノックバックする
-        if (coll.gameObject.CompareTag("enemy"))
-        {
-            transform.Translate(-0.5f, 0, 0);
-            status.HP -= you.GetComponent<characterstatus>().power;
-        }
-        */
 
         //HP回復アイテムをとったら最大HPの10％回復
         if (coll.gameObject.CompareTag("hp"))
@@ -166,9 +111,31 @@ public class player : MonoBehaviour {
         if (coll.gameObject.CompareTag("koin"))
         {
             SE.GetComponent<SE>().koukaon(1);
-            manager.coin++;
+			manager.coin+=Random.Range(1,3);
         } 
     }
+
+	//攻撃
+	void attack()
+	{
+		//ダメージ計算
+
+		//与えるダメージ
+		int damage;
+		//自分の攻撃力から相手の防御力を引く
+		damage = status.power - you.GetComponent<characterstatus>().defense;
+		//与えるダメージが1以下にならないようにする
+		if (damage < 1)
+		{
+			damage = 1;
+		}
+		//相手にダメージ
+		you.GetComponent<characterstatus>().HP = you.GetComponent<characterstatus>().HP - damage;
+		//乱数
+		rand = Random.Range(3, 8);
+		//攻撃音
+		SE.GetComponent<SE>().koukaon(rand);
+	}
     //プレイヤーの射程内に敵がいるとき
     void OnTriggerStay2D(Collider2D other)
     {
