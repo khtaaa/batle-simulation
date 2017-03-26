@@ -12,6 +12,7 @@ public class enemy : MonoBehaviour {
     public int rand;//乱数
     public GameObject SE;//音源
     public string tagu;//敵のタグ
+	public GameObject kougeki;
 
 	// Use this for initialization
 	void Start () {
@@ -93,7 +94,8 @@ public class enemy : MonoBehaviour {
             if (attackcount == status.attackspeed)
             {
                 //ダメージ計算
-
+				//攻撃エフェクト
+				Instantiate(kougeki, you.transform.position+new Vector3(Random.Range(-0.5f,1f),Random.Range(-0.5f,1f),-0.1f), Quaternion.identity);
                 //与えるダメージ
                 int damage;
                 //自分の攻撃から相手の防御力を引く

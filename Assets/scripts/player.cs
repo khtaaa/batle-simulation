@@ -10,6 +10,7 @@ public class player : MonoBehaviour {
     bool one;//死亡時に一度だけ呼び出す用の変数
     public int attackcount;//攻撃間隔カウント
     public int rand;//乱数
+	public GameObject kougeki;
 
 	void Start () {
         status = transform.root.GetComponent<characterstatus>();//ステータス獲得
@@ -110,7 +111,7 @@ public class player : MonoBehaviour {
         //コインをとったらコインのカウントをを1増加
         if (coll.gameObject.CompareTag("koin"))
         {
-            SE.GetComponent<SE>().koukaon(1);
+            SE.GetComponent<SE>().koukaon(9);
 			manager.coin+=Random.Range(1,3);
         } 
     }
@@ -119,7 +120,8 @@ public class player : MonoBehaviour {
 	void attack()
 	{
 		//ダメージ計算
-
+		//攻撃エフェクト
+		Instantiate(kougeki, you.transform.position+new Vector3(Random.Range(-0.5f,1f),Random.Range(-0.5f,1f),-0.1f), Quaternion.identity);
 		//与えるダメージ
 		int damage;
 		//自分の攻撃力から相手の防御力を引く
