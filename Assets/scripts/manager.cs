@@ -13,6 +13,7 @@ public class manager : MonoBehaviour {
 	public bool mugen = false;
 	public static bool waveok = false;
 	public GameObject menyuu;
+	public GameObject bgm;
 	void Start () {
         gameok = true;//ゲーム開始
         gameov = false;//ゲームオーバーではないのでfalseにしておく
@@ -22,7 +23,8 @@ public class manager : MonoBehaviour {
 		waveok = true;
 		wavetext.SetActive (false);
 		menyu = false;
-
+		bgm = GameObject.Find("BGM");
+		bgm.GetComponent<bgm>().bgmbgm(0);
 	}
 
     void Update()
