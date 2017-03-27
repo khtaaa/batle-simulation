@@ -29,7 +29,7 @@ public class titlemanager : MonoBehaviour {
             time += Time.deltaTime;
             if (time > 1.5f)
             {
-                Application.LoadLevel("battle");
+                Application.LoadLevel("setumei");
             }
         }
 	}
