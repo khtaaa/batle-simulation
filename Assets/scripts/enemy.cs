@@ -29,7 +29,7 @@ public class enemy : MonoBehaviour {
             status.HP = status.MAXHP;//HPをMAXHPと同じにする
 			status.power *= manager.wave*2;//攻撃力増加
 			status.defense *= manager.wave;//防御力増加
-            int syatei=1;//射程
+			int syatei=1;//射程
         }
         if (tagu == "bosu")
         {
@@ -77,6 +77,11 @@ public class enemy : MonoBehaviour {
                     Instantiate(coin, new Vector3(0, -1, 0), Quaternion.identity);
 					//次のwaveにする
 					manager.wave++;
+					//10waveごとにplayerの最大HPとMPを上昇
+					if (manager.wave % 10 == 0) {
+						you.GetComponent<characterstatus> ().MAXHP += 100;
+						you.GetComponent<characterstatus> ().MAXMP += 100;
+					}
 					manager.waveok = true;
                 }
 

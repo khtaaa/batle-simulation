@@ -22,8 +22,8 @@ public class player : MonoBehaviour {
         if (manager.gameok == true)
         {
 
-            //スペースで攻撃
-            if (Input.GetKeyDown(KeyCode.Space))
+            //スペース・クリックで攻撃
+			if (Input.GetKeyDown(KeyCode.Space)　|| Input.GetMouseButtonDown(0))
             {
                 //射程内に敵がいたら動作
                 if (you != null)

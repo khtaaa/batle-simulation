@@ -25,10 +25,12 @@ public class manager : MonoBehaviour {
 		menyu = false;
 		bgm = GameObject.Find("BGM");
 		bgm.GetComponent<bgm>().bgmbgm(0);
+
 	}
 
     void Update()
     {
+		scoartext.scoar = wave;
 		if (mugen == true) {
 			if (coin < 1) {
 				coin = 1;
@@ -62,6 +64,7 @@ public class manager : MonoBehaviour {
         //ゲームオーバーになったら動作
         if (gameov == true)
         {
+			gameok = false;
             //左クリックでtitleに戻る
             if (Input.GetMouseButton(0))
             {

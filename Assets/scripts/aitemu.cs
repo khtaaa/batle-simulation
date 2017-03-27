@@ -3,30 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class aitemu : MonoBehaviour {
-    public bool coinok = false;
-
-    // Use this for initialization
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (manager.coin > 0)
-        {
-            coinok = true;
-        }
-        else
-        {
-            coinok = false;
-        }
-    }
 
     void OnMouseDown()
     {
-        if (coinok == true)
+		if (manager.coin > 0)
         {
             if (transform.tag=="hp")
             {
