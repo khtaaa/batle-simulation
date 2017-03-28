@@ -6,7 +6,7 @@ public class aitemu : MonoBehaviour {
 
     void OnMouseDown()
     {
-		if (manager.coin > 0)
+		if (manager.coin > 0 && manager.gameok==true)
         {
             if (transform.tag=="hp")
             {

@@ -26,12 +26,14 @@ public class setumei_text : MonoBehaviour {
 		player.SetActive (false);
 		enemy.SetActive (false);
 		koin.SetActive (false);
-		skill [0].SetActive (false);
 		HP.SetActive (false);
 		MP.SetActive (false);
 		bgm.GetComponent<bgm>().bgmbgm(2);
 		for (int i = 0; i < item.Length; i++) {
 			item [i].SetActive (false);
+		}
+		for (int i = 0; i < skill.Length; i++) {
+			skill [i].SetActive (false);
 		}
 	}
 	
@@ -54,7 +56,7 @@ public class setumei_text : MonoBehaviour {
 		}
 
 		if (setumei == 2) {
-			this.GetComponent<Text> ().text = "画面下にあるのはアイテムです\nクリックするとコインを消費して\nキャラクターを強化できます";
+			this.GetComponent<Text> ().text = "画面下にあるのはアイテムです\nクリックするとコインを消費して\nキャラクターを強化できます\n左から順にHP回復、MP回復、防御力増加、攻撃力増加、攻撃速度増加です";
 			for (int i = 0; i < item.Length; i++) {
 				item [i].SetActive (true);
 			}
@@ -72,16 +74,20 @@ public class setumei_text : MonoBehaviour {
 			for (int i = 1; i < item.Length - 1; i++) {
 				item [i].SetActive (false);
 			}
-			skill [skill.Length - 1].SetActive (true);
+			for (int i = 0; i < skill.Length ; i++) {
+				skill [i].SetActive (true);
+			}
 		}
 
 		if (setumei == 5) {
-			this.GetComponent<Text> ().text = "スキルを使うとMPを消費してHPを回復できたりします";
+			this.GetComponent<Text> ().text = "MPを消費してスキルが発動できます\n左からHP回復、一定時間防御増加\n一定時間攻撃増加です";
 		}
 
 		if (setumei == 6) {
-			this.GetComponent<Text> ().text = "左上の緑のゲージがHPゲージでピンクのゲージがMPゲージです";
-			skill [skill.Length - 1].SetActive (false);
+			this.GetComponent<Text> ().text = "左上の緑のゲージがHPゲージで\nピンクのゲージがMPゲージです";
+			for (int i = 0; i < skill.Length ; i++) {
+				skill [i].SetActive (false);
+			}
 			item [0].SetActive (false);
 			item [item.Length - 1].SetActive (false);
 			HP.SetActive (true);

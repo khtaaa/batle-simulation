@@ -134,6 +134,9 @@ public class player : MonoBehaviour {
 		int damage;
 		//自分の攻撃力から相手の防御力を引く
 		damage = status.power - you.GetComponent<characterstatus>().defense;
+		if (manager.kenup > 0) {
+			damage *= 2;
+		}
 		//与えるダメージが1以下にならないようにする
 		if (damage < 1)
 		{

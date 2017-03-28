@@ -110,6 +110,9 @@ public class enemy : MonoBehaviour {
                 int damage;
                 //自分の攻撃から相手の防御力を引く
                 damage = status.power - you.GetComponent<characterstatus>().defense;
+				if (manager.tateup > 0) {
+					damage /= 2;
+				}
                 //攻撃力が1以下のならないようにする
                 if (damage < 1)
                 {
