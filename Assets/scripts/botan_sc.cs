@@ -5,6 +5,16 @@ using UnityEngine;
 public class botan_sc : MonoBehaviour {
     public GameObject SE;//音源
 
+	void Update()
+	{
+		if (Input.GetKeyDown (KeyCode.T)) {
+			manager.menyu = !manager.menyu;
+			//スクロール状態を切り替え
+			haikei.move = !haikei.move;
+			//効果音
+			SE.GetComponent<SE>().koukaon(0);
+		}
+	}
     //このオブジェクトがクリックされたら動作
     void OnMouseDown()
     {

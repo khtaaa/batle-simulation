@@ -37,6 +37,7 @@ public class manager : MonoBehaviour {
 
     void Update()
     {
+
 		if (gameok == true) {
 			if (tateup > 0) {
 				tate.SetActive (true);

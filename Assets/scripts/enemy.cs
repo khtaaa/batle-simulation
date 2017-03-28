@@ -80,7 +80,9 @@ public class enemy : MonoBehaviour {
 					//10waveごとにplayerの最大HPとMPを上昇
 					if (manager.wave % 10 == 0) {
 						you.GetComponent<characterstatus> ().MAXHP += 100;
+						you.GetComponent<characterstatus> ().HP = you.GetComponent<characterstatus> ().MAXHP;
 						you.GetComponent<characterstatus> ().MAXMP += 100;
+						you.GetComponent<characterstatus> ().MP = you.GetComponent<characterstatus> ().MAXMP;
 					}
 					manager.waveok = true;
                 }
