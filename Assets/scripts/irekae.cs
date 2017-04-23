@@ -8,6 +8,7 @@ public class irekae : MonoBehaviour {
 	public GameObject[] skill;
 	public GameObject ST;
 	public GameObject SE;
+	public GameObject[] haikei;
 	// Use this for initialization
 	void Start () {
 		_irekae = true;
@@ -19,9 +20,13 @@ public class irekae : MonoBehaviour {
 	void Update () {
 		if (manager.gameok == true) {
 			if (Input.GetKeyDown (KeyCode.Backspace)) {
+				SE.GetComponent<SE> ().koukaon (11);
 				_irekae = !_irekae;
 			}
 			if (_irekae == true) {
+				haikei [1].SetActive (false);
+				haikei [0].SetActive (true);
+				
 				for (int i = 0; i < item.Length; i++) {
 					item [i].SetActive (true);
 				}
@@ -61,6 +66,8 @@ public class irekae : MonoBehaviour {
 					}
 				}
 			} else {
+				haikei [0].SetActive (false);
+				haikei [1].SetActive (true);
 				for (int i = 0; i < item.Length; i++) {
 					item [i].SetActive (false);
 				}
