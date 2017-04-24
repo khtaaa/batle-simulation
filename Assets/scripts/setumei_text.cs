@@ -12,6 +12,7 @@ public class setumei_text : MonoBehaviour {
 	public GameObject botan;
 	public GameObject[] skill;
 	public GameObject[] item;
+	public GameObject irekae;
 	public GameObject HP;
 	public GameObject MP;
 	public GameObject SE;//音源
@@ -22,6 +23,7 @@ public class setumei_text : MonoBehaviour {
 	void Start () {
 		setumei = 0;
 		this.GetComponent<Text>().text = "チュートリアル" ;
+		irekae.SetActive (false);
 		botan.SetActive (false);
 		player.SetActive (false);
 		enemy.SetActive (false);
@@ -42,8 +44,19 @@ public class setumei_text : MonoBehaviour {
 
 		if (setumei == 0) {
 			this.GetComponent<Text> ().text = "チュートリアル";
+			HP.SetActive (false);
+			MP.SetActive (false);
 		}
 		if (setumei == 1) {
+			this.GetComponent<Text> ().text = "画面左上の緑のゲージがHPゲージで\nピンクのゲージがMPゲージです";
+			HP.SetActive (true);
+			MP.SetActive (true);
+			manager.gameok = false;
+			player.SetActive (false);
+			enemy.SetActive (false);
+		}
+		if(setumei==2)
+		{
 			this.GetComponent<Text> ().text = "画面クリック(スペース)で攻撃します";
 			if (Input.GetKeyDown (KeyCode.Space) || Input.GetMouseButtonDown (0)) {
 				Instantiate (kougeki, enemy.transform.position + new Vector3 (Random.Range (-0.5f, 1f), Random.Range (-0.5f, 1f), -0.1f), Quaternion.identity);
@@ -53,25 +66,34 @@ public class setumei_text : MonoBehaviour {
 			manager.gameok = true;
 			player.SetActive (true);
 			enemy.SetActive (true);
+			koin.SetActive (false);
 		}
 
-		if (setumei == 2) {
-			this.GetComponent<Text> ().text = "画面下にあるのはアイテムです\nクリックするとコインを消費して\nキャラクターを強化できます\n左から順にHP回復、MP回復、防御力増加、攻撃力増加、攻撃速度増加です";
+		if (setumei == 3) {
+			this.GetComponent<Text> ().text = "敵を倒すとランダムでコインが手に入ります";
+			enemy.SetActive (false);
+			koin.SetActive (true);
+			for (int i = 0; i < item.Length; i++) {
+				item [i].SetActive (false);
+			}
+			irekae.SetActive (false);
+		}
+		if (setumei == 4) {
+		this.GetComponent<Text> ().text = "画面下にあるのはアイテムです\nクリックするとコインを消費して\nキャラクターを強化できます\n左から順にHP回復、MP回復、防御力増加、攻撃力増加、攻撃速度増加です";
 			for (int i = 0; i < item.Length; i++) {
 				item [i].SetActive (true);
 			}
-
-		}
-		if (setumei == 3) {
-			this.GetComponent<Text> ().text = "コインは敵を倒すとランダムで手に入ります";
-			enemy.SetActive (false);
-			koin.SetActive (true);
-		}
-
-		if (setumei == 4) {
-			this.GetComponent<Text> ().text = "アイテム欄の右側のボタン(backspace)を押すと\nアイテムとスキルが入れ替わります";
+			for (int i = 0; i < skill.Length ; i++) {
+				skill [i].SetActive (false);
+			}
+			irekae.SetActive (true);
 			koin.SetActive (false);
-			for (int i = 1; i < item.Length - 1; i++) {
+		}
+
+		if (setumei == 5) {
+			this.GetComponent<Text> ().text = "アイテム欄の左ALT(右側のボタン)を押すと\nアイテムとスキルが入れ替わります";
+
+			for (int i = 0; i < item.Length; i++) {
 				item [i].SetActive (false);
 			}
 			for (int i = 0; i < skill.Length ; i++) {
@@ -79,23 +101,21 @@ public class setumei_text : MonoBehaviour {
 			}
 		}
 
-		if (setumei == 5) {
-			this.GetComponent<Text> ().text = "MPを消費してスキルが発動できます\n左からHP回復、一定時間防御増加\n一定時間攻撃増加です";
-		}
-
 		if (setumei == 6) {
-			this.GetComponent<Text> ().text = "左上の緑のゲージがHPゲージで\nピンクのゲージがMPゲージです";
+			this.GetComponent<Text> ().text = "MPを消費してスキルが発動できます\n左からHP回復、一定時間防御増加\n一定時間攻撃増加です";
 			for (int i = 0; i < skill.Length ; i++) {
-				skill [i].SetActive (false);
+				skill [i].SetActive (true);
 			}
-			item [0].SetActive (false);
-			item [item.Length - 1].SetActive (false);
-			HP.SetActive (true);
-			MP.SetActive (true);
+			irekae.SetActive (true);
+			player.SetActive (true);
 		}
 
 		if (setumei == 7) {
 			this.GetComponent<Text> ().text = "HPがなくなってしまうとゲームオーバーになってしまいます";
+			for (int i = 0; i < skill.Length ; i++) {
+				skill [i].SetActive (false);
+			}
+			irekae.SetActive (false);
 			player.SetActive (false);
 		}
 
@@ -110,10 +130,11 @@ public class setumei_text : MonoBehaviour {
 		}
 		if (setumei == 10) {
 			this.GetComponent<Text> ().text = "waveが上がっていくごとに敵が強くなっていきますが\n10waveごとにキャラクターの最大HPとMPも増加します";
+			botan.SetActive (false);
 		}
 
 		if (setumei == 11) {
-			this.GetComponent<Text> ().text = "最後に右上のボタンを押すと一時停止できます";
+			this.GetComponent<Text> ().text = "最後に右上のボタン(T)を押すと一時停止できます";
 			botan.SetActive (true);
 		}
 

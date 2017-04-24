@@ -19,7 +19,7 @@ public class irekae : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (manager.gameok == true) {
-			if (Input.GetKeyDown (KeyCode.Backspace)) {
+			if (Input.GetKeyDown (KeyCode.LeftAlt)) {
 				SE.GetComponent<SE> ().koukaon (11);
 				_irekae = !_irekae;
 			}
