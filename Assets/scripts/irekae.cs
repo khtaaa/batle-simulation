@@ -4,39 +4,47 @@ using UnityEngine;
 
 public class irekae : MonoBehaviour {
 	public bool _irekae;
-	public GameObject[] item;
-	public GameObject[] skill;
-	public GameObject ST;
-	public GameObject SE;
+	public GameObject[] item;//アイテム
+	public GameObject[] skill;//スキル
+	public GameObject ST;//プレイヤーデータ
+	public GameObject SE;//効果音
 	public GameObject[] haikei;
 	// Use this for initialization
 	void Start () {
 		_irekae = true;
-		ST= GameObject.Find ("player");
-		SE = GameObject.Find ("SE");
+		ST= GameObject.Find ("player");//STにプレイヤーを代入
+		SE = GameObject.Find ("SE");//SEにSEを代入
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		if (manager.gameok == true) {
+			//左ALTを押したらアイテムとスキルを入れ替え
 			if (Input.GetKeyDown (KeyCode.LeftAlt)) {
 				SE.GetComponent<SE> ().koukaon (11);
 				_irekae = !_irekae;
 			}
 			if (_irekae == true) {
+				//アイテムとスキルの背景入れ替え
 				haikei [1].SetActive (false);
 				haikei [0].SetActive (true);
-				
+
+				//アイテムをすべて表示
 				for (int i = 0; i < item.Length; i++) {
 					item [i].SetActive (true);
 				}
+				//スキルをすべて非表示
 				for (int i = 0; i < skill.Length; i++) {
 					skill [i].SetActive (false);
 				}
 
+
+				//コインが1枚以上のとき動作
+				//アイテムクリックの召還処理
+				//アイテムのキーボードでの召還処理
 				if (manager.coin > 0) {
 					if (Input.GetKeyDown (KeyCode.Alpha1)) {
-						manager.coin--;
+						manager.coin--;//コインを減少
 						enemyspown.aitemu = 0;
 						enemyspown.coin = true;
 					}
@@ -66,15 +74,20 @@ public class irekae : MonoBehaviour {
 					}
 				}
 			} else {
+				//アイテムとスキルの背景入れ替え
 				haikei [0].SetActive (false);
 				haikei [1].SetActive (true);
+
+				//アイテムをすべて非表示
 				for (int i = 0; i < item.Length; i++) {
 					item [i].SetActive (false);
 				}
+				//スキルをすべて表示
 				for (int i = 0; i < skill.Length; i++) {
 					skill [i].SetActive (true);
 				}
 
+				//スキル処理
 				if (ST.GetComponent<characterstatus> ().MP > 10 && ST.GetComponent<characterstatus> ().HP <= ST.GetComponent<characterstatus> ().MAXHP / 10 * 9) {
 					if (Input.GetKeyDown (KeyCode.Alpha1)) {
 						ST.GetComponent<characterstatus> ().MP -= 10;

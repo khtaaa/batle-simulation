@@ -79,7 +79,7 @@ public class setumei_text : MonoBehaviour {
 			irekae.SetActive (false);
 		}
 		if (setumei == 4) {
-		this.GetComponent<Text> ().text = "画面下にあるのはアイテムです\nクリックするとコインを消費して\nキャラクターを強化できます\n左から順にHP回復、MP回復、防御力増加、攻撃力増加、攻撃速度増加です";
+			this.GetComponent<Text> ().text = "画面下にあるのはアイテムです\nクリックするとコインを消費してキャラクターを強化できます\nキーボードの1、2、3、4、で使用でき\n左から順にHP回復、MP回復、防御力増加、攻撃力増加、攻撃速度増加です";
 			for (int i = 0; i < item.Length; i++) {
 				item [i].SetActive (true);
 			}
@@ -91,7 +91,7 @@ public class setumei_text : MonoBehaviour {
 		}
 
 		if (setumei == 5) {
-			this.GetComponent<Text> ().text = "アイテム欄の左ALT(右側のボタン)を押すと\nアイテムとスキルが入れ替わります";
+			this.GetComponent<Text> ().text = "アイテム欄の右側のボタン(左ALT)を押すと\nアイテムとスキルが入れ替わります";
 
 			for (int i = 0; i < item.Length; i++) {
 				item [i].SetActive (false);
@@ -102,7 +102,7 @@ public class setumei_text : MonoBehaviour {
 		}
 
 		if (setumei == 6) {
-			this.GetComponent<Text> ().text = "MPを消費してスキルが発動できます\n左からHP回復、一定時間防御増加\n一定時間攻撃増加です";
+			this.GetComponent<Text> ().text = "MPを消費してスキルが発動できます\nキーボードの1、2、3、で使用でき\n左からHP回復、一定時間防御増加\n一定時間攻撃増加です";
 			for (int i = 0; i < skill.Length ; i++) {
 				skill [i].SetActive (true);
 			}
