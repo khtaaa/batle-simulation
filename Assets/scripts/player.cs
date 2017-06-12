@@ -9,8 +9,7 @@ public class player : MonoBehaviour {
     public GameObject gameover;//ゲームオーバーの画像用オブジェクト
     bool one;//死亡時に一度だけ呼び出す用の変数
     public int attackcount;//攻撃間隔カウント
-    public int rand;//乱数
-	public GameObject kougeki;
+	public GameObject kougeki;//攻撃エフェクト
 
 	void Start () {
         status = transform.root.GetComponent<characterstatus>();//ステータス獲得
@@ -144,10 +143,8 @@ public class player : MonoBehaviour {
 		}
 		//相手にダメージ
 		you.GetComponent<characterstatus>().HP = you.GetComponent<characterstatus>().HP - damage;
-		//乱数
-		rand = Random.Range(3, 8);
 		//攻撃音
-		SE.GetComponent<SE>().koukaon(rand);
+		SE.GetComponent<SE>().koukaon(Random.Range(3, 8));
 	}
     //プレイヤーの射程内に敵がいるとき
     void OnTriggerStay2D(Collider2D other)

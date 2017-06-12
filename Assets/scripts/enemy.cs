@@ -9,11 +9,10 @@ public class enemy : MonoBehaviour {
     public int syatei;//射程
     public int attackcount;//攻撃間隔のカウント
     public GameObject you=null;//射程内のオブジェクト保存用
-    public int rand;//乱数
     public GameObject SE;//音源
 	public GameObject bgm;//BGM
     public string tagu;//敵のタグ
-	public GameObject kougeki;
+	public GameObject kougeki;//攻撃エフェクト
 
 	// Use this for initialization
 	void Start () {
@@ -22,7 +21,7 @@ public class enemy : MonoBehaviour {
 		bgm = GameObject.Find("BGM");//BGMオブジェクト獲得
         status = transform.root.GetComponent<characterstatus>();//ステータス獲得
         XX = GameObject.Find("player").transform.position.x;//プレイヤーの座標獲得
-        enemyspown.spo++;//enemyspownのエネミーの数をプラス
+        spown.spo++;//enemyspownのエネミーの数をプラス
         if (tagu == "enemy")
         {
 			status.MAXHP *= manager.wave;//MAXHPを増加
@@ -63,7 +62,7 @@ public class enemy : MonoBehaviour {
             if (status.HP <= 0)
             {
 				SE.GetComponent<SE>().koukaon(10);
-                enemyspown.spo--;//enemyspownのエネミーの数をマイナス
+                spown.spo--;//enemyspownのエネミーの数をマイナス
                 //ドロップアイテムを生成
                 if (tagu == "enemy")
                 {
@@ -124,10 +123,8 @@ public class enemy : MonoBehaviour {
                 you.GetComponent<characterstatus>().HP = you.GetComponent<characterstatus>().HP - damage;
                 //カウントリセット
                 attackcount = 0;
-                //乱数
-                rand = Random.Range(3,8);
                 //攻撃音
-                SE.GetComponent<SE>().koukaon(rand);
+				SE.GetComponent<SE>().koukaon(Random.Range(3,8));
             }
 
         }

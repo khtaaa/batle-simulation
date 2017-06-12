@@ -6,6 +6,7 @@ public class kougeki_sc : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		//生成されて3秒で削除
         Destroy(gameObject, .3f);
 	}
 	

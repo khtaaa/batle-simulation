@@ -7,11 +7,11 @@ public class wavetext : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		this.GetComponent<Text>().text = "WAVE" + manager.wave;
+		this.GetComponent<Text>().text = "WAVE" + manager.wave;//wave表示
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		this.GetComponent<Text>().text = "WAVE" + manager.wave;		
+		this.GetComponent<Text>().text = "WAVE" + manager.wave;	//wave表示	
 	}
 }

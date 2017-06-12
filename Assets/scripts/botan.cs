@@ -16,12 +16,15 @@ public class botan : MonoBehaviour {
 
 	public void tugi()
 	{
+		//次の説明
 		setumei_text.setumei++;
 	}
 
 	public void mae()
 	{
+		//前の説明
 		setumei_text.setumei--;
+		//0以下にならないように調節
 		if (setumei_text.setumei < 0) {
 			setumei_text.setumei = 0;
 		}
@@ -29,6 +32,7 @@ public class botan : MonoBehaviour {
 
 	public void sukippu()
 	{
+		//バトルシーンに切り替え
 		Application.LoadLevel("battle");
 	}
 }

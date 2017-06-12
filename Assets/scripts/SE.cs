@@ -5,18 +5,17 @@ using System;
 using System.Linq;
 
 public class SE : MonoBehaviour {
-    public AudioClip[] seLists;
-    AudioSource source;
+    public AudioClip[] seLists;//効果音リスト
+	AudioSource source;//AudioSource
 
-	// Use this for initialization
-	void Start () {
-        source = GetComponent<AudioSource>();
+		void Start () {
+		source = GetComponent<AudioSource>();//AudioSource獲得
 	}
 
     public void koukaon(int i)
     {
-		source.PlayOneShot (null);
-        source.PlayOneShot(seLists[i]);
+		source.PlayOneShot (null);//効果音初期化
+        source.PlayOneShot(seLists[i]);//効果音再生
 		return;
     }
 }

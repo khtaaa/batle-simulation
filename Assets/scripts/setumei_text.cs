@@ -5,22 +5,22 @@ using UnityEngine.UI;
 
 public class setumei_text : MonoBehaviour {
 	public static int setumei = 0;
-	public GameObject player;
-	public GameObject enemy;
-	public GameObject kougeki;
-	public GameObject koin;
-	public GameObject botan;
-	public GameObject[] skill;
-	public GameObject[] item;
-	public GameObject irekae;
-	public GameObject HP;
-	public GameObject MP;
+	public GameObject player;//player
+	public GameObject enemy;//enemy
+	public GameObject kougeki;//攻撃
+	public GameObject koin;//コイン
+	public GameObject botan;//一時停止
+	public GameObject[] skill;//スキルリスト
+	public GameObject[] item;//アイテムリスト
+	public GameObject irekae;//入れ替え
+	public GameObject HP;//HPゲージ
+	public GameObject MP;//MPゲージ
 	public GameObject SE;//音源
 	public int rand;//乱数
 	public GameObject bgm;
 
-	// Use this for initialization
 	void Start () {
+		//初期化
 		setumei = 0;
 		this.GetComponent<Text>().text = "チュートリアル" ;
 		irekae.SetActive (false);
@@ -38,8 +38,7 @@ public class setumei_text : MonoBehaviour {
 			skill [i].SetActive (false);
 		}
 	}
-	
-	// Update is called once per frame
+
 	void Update () {
 
 		if (setumei == 0) {

@@ -6,41 +6,43 @@ public class aitemu : MonoBehaviour {
 
     void OnMouseDown()
     {
+		//コインが0以上でゲーム中ならアイテム生成
 		if (manager.coin > 0 && manager.gameok==true)
         {
+			//クリックした画像のタグを判定してアイテムを生成
             if (transform.tag=="hp")
             {
-                manager.coin--;
-                enemyspown.aitemu = 0;
-                enemyspown.coin = true;
+                manager.coin--;//コイン消費
+                spown.aitemu = 0;//アイテム番号入力
+                spown.coin = true;//アイテム生成
             }
 
             if (transform.tag == "ken")
             {
                 manager.coin--;
-                enemyspown.aitemu = 1;
-                enemyspown.coin = true;
+                spown.aitemu = 1;
+                spown.coin = true;
             }
 
             if (transform.tag == "mp")
             {
                 manager.coin--;
-                enemyspown.aitemu = 2;
-                enemyspown.coin = true;
+                spown.aitemu = 2;
+                spown.coin = true;
             }
 
             if (transform.tag == "tate")
             {
                 manager.coin--;
-                enemyspown.aitemu = 3;
-                enemyspown.coin = true;
+                spown.aitemu = 3;
+                spown.coin = true;
             }
 
 			if (transform.tag == "kurisutaru")
 			{
 				manager.coin--;
-				enemyspown.aitemu = 4;
-				enemyspown.coin = true;
+				spown.aitemu = 4;
+				spown.coin = true;
 			}
         }
     }

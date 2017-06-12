@@ -45,32 +45,32 @@ public class irekae : MonoBehaviour {
 				if (manager.coin > 0) {
 					if (Input.GetKeyDown (KeyCode.Alpha1)) {
 						manager.coin--;//コインを減少
-						enemyspown.aitemu = 0;
-						enemyspown.coin = true;
+						spown.aitemu = 0;//生成するアイテムを知らせる
+						spown.coin = true;//アイテム生成
 					}
 
 					if (Input.GetKeyDown (KeyCode.Alpha4)) {
 						manager.coin--;
-						enemyspown.aitemu = 1;
-						enemyspown.coin = true;
+						spown.aitemu = 1;
+						spown.coin = true;
 					}
 
 					if (Input.GetKeyDown (KeyCode.Alpha2)) {
 						manager.coin--;
-						enemyspown.aitemu = 2;
-						enemyspown.coin = true;
+						spown.aitemu = 2;
+						spown.coin = true;
 					}
 
 					if (Input.GetKeyDown (KeyCode.Alpha3)) {
 						manager.coin--;
-						enemyspown.aitemu = 3;
-						enemyspown.coin = true;
+						spown.aitemu = 3;
+						spown.coin = true;
 					}
 
 					if (Input.GetKeyDown (KeyCode.Alpha5)) {
 						manager.coin--;
-						enemyspown.aitemu = 4;
-						enemyspown.coin = true;
+						spown.aitemu = 4;
+						spown.coin = true;
 					}
 				}
 			} else {
